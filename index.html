@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Sorpresa para Cantoqui</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      background-color: #fff0f5;
+      padding: 50px;
+      overflow: hidden;
+    }
+    h1 {
+      font-size: 2em;
+      margin-bottom: 30px;
+    }
+    button {
+      padding: 10px 20px;
+      font-size: 1.2em;
+      background-color: #ff69b4;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+    .falling {
+      position: absolute;
+      width: 150px;
+      animation: fall linear infinite;
+      z-index: 1000;
+    }
+    @keyframes fall {
+      0% {
+        top: -100px;
+        opacity: 1;
+      }
+      100% {
+        top: 100vh;
+        opacity: 0;
+      }
+    }
+
+    /* Cuadro amarillo*/
+     .message-box {
+      display: none;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+       width: auto;
+       max-width: 80%;
+      background-color: yellow;
+      color: black;
+      padding: 20px;
+      font-size: 1.5em;
+      font-weight: bold;
+      border-radius: 10px;
+      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    }
+  </style>
+</head>
+<body>
+  <h1>Te tengo una sorpresa, Chelow 🫣</h1>
+  <button onclick="startSurprise()">Pica aquí para abrirla</button>
+  <div id="messageBox" class="message-box">
+<p>TE MERECES todas las flores amarillas del mundo, LYU 💛</p>
+</div>
+
+  <!-- Video oculto para que suene la canción -->
+  <audio id="surpriseMusic" src="floresamarillas.mp3"></audio>
+  <script>
+    const images = [
+      'balon.gif', // Reemplaza con tu imagen de balón
+      'flor.gif'   // Reemplaza con tu imagen de flor
+    ];
+
+    function startSurprise() {
+      // Reproduce la canción MP3
+        document.getElementById("surpriseMusic").play();
+      
+      // Empieza a hacer caer flores y balones
+      setInterval(() => {
+        const img = document.createElement('img');
+        img.src = images[Math.floor(Math.random() * images.length)];
+        img.className = 'falling';
+        img.style.left = Math.random() * window.innerWidth + 'px';
+        img.style.animationDuration = (3 + Math.random() * 2) + 's';
+        document.body.appendChild(img);
+
+
+        // Eliminar después de caer
+        setTimeout(() => img.remove(), 6000);
+      }, 300);
+
+       //Muestra cuadro amarillo
+      setTimeout(() => {
+        document.getElementById("messageBox").style.display="block";
+      }, 3000); //espera 3 seg antes de mostrar mensaje
+    
+    }
+  </script>
+</body>
+</html>
